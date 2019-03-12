@@ -36,8 +36,17 @@ public class QueueManager {
                 System.out.println("Using a unsorted array.");
                 break;
             case "sl":
+                q = new SortedLinkedPriorityQueue<>();
+                System.out.println("Using a sorted linked list.");
+                break;
             case "ul":
+                q = new UnsortedLinkedPriorityQueue<>();
+                System.out.println("Using a unsorted linked list.");
+                break;
             case "h":
+                q = new BinaryHeapQueue<>();
+                System.out.println("Using a max binary heap queue.");
+                break;
             default:
                 q = new SortedArrayPriorityQueue<>(8);
                 System.out.println("Invalid choice, using sorted array.");

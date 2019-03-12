@@ -1,6 +1,6 @@
 package priorityqueue;
 
-/**k
+/**
  * @param <T> The type of things being stored.
  */
 public class SortedArrayPriorityQueue<T> implements PriorityQueue<T> {

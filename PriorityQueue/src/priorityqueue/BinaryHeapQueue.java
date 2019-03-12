@@ -1,127 +1,102 @@
 package priorityqueue;
-
 /**
  * @param <T> The type of things being stored.
  */
 public class BinaryHeapQueue<T>  implements PriorityQueue<T> {
-    private int[] Heap;
-    private int size;
-    private int element;
-    private int maxsize; 
-  
-    private static final int FRONT = 1;
         
-    public BinaryHeapQueue(int maxsize) {
-        this.maxsize = maxsize; 
-        this.size = 0; 
-        Heap = new int[this.maxsize + 1]; 
-        Heap[0] = Integer.MIN_VALUE; 
+    private static final int DEFAULT_CAPACITY = 10;
+    protected T[] array;
+    protected int size;
+    
+    
+    public BinaryHeapQueue()
+    {
+        array = (T[])new Comparable[DEFAULT_CAPACITY];  
+        size = 0;
     }
 
-    private int parent(int pos){
-    return pos / 2;
-    }
-    
-    private int leftChild(int pos) 
-    { 
-        return (2 * pos); 
-    } 
-
-    private int rightChild(int pos) 
-    { 
-        return (2 * pos) + 1; 
-    } 
-    
-    private boolean isLeaf(int pos) 
-    { 
-        if (pos >= (size / 2) && pos <= size) { 
-            return true; 
-        } 
-        return false; 
-    } 
-  
-    private void swap(int fpos, int spos) 
-    { 
-        int tmp; 
-        tmp = Heap[fpos]; 
-        Heap[fpos] = Heap[spos]; 
-        Heap[spos] = tmp; 
-    } 
-    
-    // Function to heapify the node at pos 
-    private void minHeapify(int pos) 
-    { 
-  
-        // If the node is a non-leaf node and greater 
-        // than any of its child 
-        if (!isLeaf(pos)) { 
-            if (Heap[pos] > Heap[leftChild(pos)] 
-                || Heap[pos] > Heap[rightChild(pos)]) { 
-  
-                // Swap with the left child and heapify 
-                // the left child 
-                if (Heap[leftChild(pos)] < Heap[rightChild(pos)]) { 
-                    swap(pos, leftChild(pos)); 
-                    minHeapify(leftChild(pos)); 
-                } 
-  
-                // Swap with the right child and heapify  
-                // the right child 
-                else { 
-                    swap(pos, rightChild(pos)); 
-                    minHeapify(rightChild(pos)); 
-                } 
-            } 
-        } 
-    } 
-    
     @Override
     public void add(T item, int priority) throws QueueOverflowException {
+        if (size >= array.length - 1) {
+        }        
         
-        Heap[++size] = element; 
-        int current = size; 
-  
-        while (Heap[current] < Heap[parent(current)]) { 
-            swap(current, parent(current)); 
-            current = parent(current); 
-        }
+        // place element into heap at bottom
+        size++;
+        int index = size;
+        
+
     }
 
-    public void minHeap() 
-    { 
-        for (int pos = (size / 2); pos >= 1; pos--) { 
-            minHeapify(pos); 
-        } 
-    } 
-    
     @Override
     public T head() throws QueueUnderflowException {
-        int popped = Heap[FRONT]; 
-        Heap[FRONT] = Heap[size--]; 
-        minHeapify(FRONT);
-        return null;
+        if (this.isEmpty()) {
+            throw new QueueUnderflowException();
+        }
+        
+        return array[1];
     }
 
     @Override
     public void remove() throws QueueUnderflowException {
-        int popped = Heap[FRONT]; 
-        Heap[FRONT] = Heap[size--]; 
-        minHeapify(FRONT); 
+        T result = head();
+    	
+    	// get rid of the last leaf/decrement
+    	array[1] = array[size];
+    	array[size] = null;
+    	size--;
+    	
+
+
     }
 
     @Override
     public boolean isEmpty() {
-        return FRONT < 0;
+        return size == 0;
     }
     
     @Override
-    public String toString() {
-       for (int i = 1; i <= size / 2; i++) { 
-            System.out.print(" PARENT : " + Heap[i] 
-                     + " LEFT CHILD : " + Heap[2 * i] 
-                   + " RIGHT CHILD :" + Heap[2 * i + 1]); 
-            System.out.println(); 
-        } 
+    public String toString(){
         return null;
+    }
+
+    
+    protected boolean hasParent(int i) {
+        return i > 1;
+    }
+    
+    
+    protected int leftIndex(int i) {
+        return i * 2;
+    }
+    
+    
+    protected int rightIndex(int i) {
+        return i * 2 + 1;
+    }
+    
+    
+    protected boolean hasLeftChild(int i) {
+        return leftIndex(i) <= size;
+    }
+    
+    
+    protected boolean hasRightChild(int i) {
+        return rightIndex(i) <= size;
+    }
+    
+    
+    protected T parent(int i) {
+        return array[parentIndex(i)];
+    }
+    
+    
+    protected int parentIndex(int i) {
+        return i / 2;
+    }    
+    
+    protected void swap(int index1, int index2) {
+        T tmp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = tmp;        
     }
 }
