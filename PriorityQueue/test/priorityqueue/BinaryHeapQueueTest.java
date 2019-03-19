@@ -1,40 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package priorityqueue;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author benja
- */
-public class BinaryHeapQueueTest {
+public class BinaryHeapQueueTest extends PriorityQueueTest {
+    
+        String name = "ben";
+        String name2 = "alan";
+        String name3 = "dean";
+        String name4 = "mary";
+        String name5 = "stacy";
+        String name6 = "gary";
+        String name7 = "bob";
+        String name8 = "manman";
+        String overflow = "overflowtest";
+        Person person = new Person(name);
+        Person person2 = new Person(name2);
+        Person person3 = new Person(name3);
+        Person person4 = new Person(name4);
+        Person person5 = new Person(name5);
+        Person person6 = new Person(name6);
+        Person person7 = new Person(name7);
+        Person person8 = new Person(name8);
+        Person overflowtest = new Person(overflow);
     
     public BinaryHeapQueueTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+    @Override
+    public void setUp(){
+        instance = new BinaryHeapQueue<>(10);
     }
 
     /**
@@ -58,7 +55,6 @@ public class BinaryHeapQueueTest {
     public void testMinHeap() {
         System.out.println("minHeap");
         BinaryHeapQueue instance = null;
-        instance.minHeap();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

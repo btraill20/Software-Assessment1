@@ -16,6 +16,10 @@ public class Node<T> {
         return item;
     }
     
+    public T setitem(){
+        return item;
+    }
+    
     public int getPriority(){
         return priority;
     }

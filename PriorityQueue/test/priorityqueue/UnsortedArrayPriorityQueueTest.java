@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package priorityqueue;
 
 import org.junit.After;
@@ -12,97 +7,131 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author benja
- */
-public class UnsortedArrayPriorityQueueTest {
+public class UnsortedArrayPriorityQueueTest extends PriorityQueueTest {
+    
+        String name = "ben";
+        String name2 = "alan";
+        String name3 = "dean";
+        String name4 = "mary";
+        String name5 = "stacy";
+        String name6 = "gary";
+        String name7 = "bob";
+        String name8 = "manman";
+        String overflow = "overflowtest";
+        Person person = new Person(name);
+        Person person2 = new Person(name2);
+        Person person3 = new Person(name3);
+        Person person4 = new Person(name4);
+        Person person5 = new Person(name5);
+        Person person6 = new Person(name6);
+        Person person7 = new Person(name7);
+        Person person8 = new Person(name8);
+        Person overflowtest = new Person(overflow);
     
     public UnsortedArrayPriorityQueueTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
-    public void setUp() {
+    @Override
+    public void setUp(){
+        instance = new UnsortedArrayPriorityQueue<>(8);
     }
     
-    @After
-    public void tearDown() {
+    //basic add test.
+    @Test
+    public void testAdd() throws QueueOverflowException {
+        System.out.println("basic adding test");
+        instance.add(person,1);
+        instance.add(person2,2);
+        String expOutput = "[(ben, 1), (alan, 2)]";
+        System.out.println("Expected: "+expOutput);
+        String output = instance.toString();
+        System.out.println("actual: "+output);
+        assertEquals(expOutput, output);
+    }
+    
+    //test to check if it throws when a queue is full.
+    @Test(expected = QueueOverflowException.class)
+    public void testAdd2() throws QueueOverflowException {
+        System.out.println("\t");
+        System.out.println("Adding test 2, testing overflowexception");
+        instance.add(person,1);
+        instance.add(person2,2);
+        instance.add(person3,3);
+        instance.add(person4,4);
+        instance.add(person5,5);
+        instance.add(person6,6);
+        instance.add(person7,7);
+        instance.add(person8,8);
+        instance.add(overflowtest,100);
+        String expOutput = "[(manman, 8), (bob, 7), (gary, 6), (stacy, 5), (mary, 4), (dean, 3), (alan, 2), (ben, 1)]";
+        System.out.println("Expected: "+expOutput);
+        String output = instance.toString();
+        System.out.println("actual: "+output);
     }
 
-    /**
-     * Test of head method, of class UnsortedArrayPriorityQueue.
-     */
+    //test to make sure the remove method works.
     @Test
-    public void testHead() throws Exception {
-        System.out.println("head");
-        UnsortedArrayPriorityQueue instance = null;
-        Object expResult = null;
-        Object result = instance.head();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of add method, of class UnsortedArrayPriorityQueue.
-     */
-    @Test
-    public void testAdd() throws Exception {
-        System.out.println("add");
-        Object item = null;
-        int priority = 0;
-        UnsortedArrayPriorityQueue instance = null;
-        instance.add(item, priority);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of remove method, of class UnsortedArrayPriorityQueue.
-     */
-    @Test
-    public void testRemove() throws Exception {
-        System.out.println("remove");
-        UnsortedArrayPriorityQueue instance = null;
+    public void testRemove() throws QueueOverflowException,QueueUnderflowException {
+        System.out.println("\t");
+        System.out.println("test to add some people to a queue and then a remove of the head or 'pop'");
+        instance.add(person,1);
+        instance.add(person2,2);
+        instance.add(person3,3);        
+        String addOutput = instance.toString();
+        System.out.println("added to queue: "+addOutput);
+        
         instance.remove();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String removeOutput = instance.toString();
+        System.out.println("Queue after remove: "+removeOutput);
+        
+        String expOutput = "[(alan, 2), (dean, 3)]";
+        System.out.println("Expected: "+expOutput);
+        String output = instance.toString();
+        System.out.println("actual: "+output);
+        assertEquals(expOutput, output);
     }
-
-    /**
-     * Test of isEmpty method, of class UnsortedArrayPriorityQueue.
-     */
-    @Test
-    public void testIsEmpty() {
-        System.out.println("isEmpty");
-        UnsortedArrayPriorityQueue instance = null;
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    @Test(expected = QueueUnderflowException.class)
+    public void testRemoveUnderflow() throws QueueOverflowException,QueueUnderflowException{
+        System.out.println("\t");
+        System.out.println("test to check the underflow expection works when removing from queue");
+        instance.add(person,1);
+        String queue = instance.toString();
+        System.out.println("queue: "+queue);
+        
+        instance.remove();
+        instance.remove();
+        instance.remove();
+        
+        String queueCheck = instance.toString();
+        System.out.println("queue: "+queueCheck);
     }
-
-    /**
-     * Test of toString method, of class UnsortedArrayPriorityQueue.
-     */
+    
+    //test to check the head of the queue before and after a remove()
     @Test
-    public void testToString() {
-        System.out.println("toString");
-        UnsortedArrayPriorityQueue instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testHeadCheck() throws QueueOverflowException,QueueUnderflowException{
+        System.out.println("\t");
+        System.out.println("Test to check the head of the queue before and after remove()");
+        instance.add(person,1);
+        instance.add(person2,2);
+        instance.add(person3,3);        
+        String addOutput = instance.toString();
+        System.out.println("added to queue: "+addOutput);
+        
+        instance.head();
+        
+        instance.remove();
+        String removeOutput = instance.toString();
+        System.out.println("Queue after remove: "+removeOutput);
+
+        instance.head();
+        
+        String expOutput = "[(alan, 2), (dean, 3)]";
+        System.out.println("Expected: "+expOutput);
+        String output = instance.toString();
+        System.out.println("actual: "+output);
+        assertEquals(expOutput, output);
     }
     
 }

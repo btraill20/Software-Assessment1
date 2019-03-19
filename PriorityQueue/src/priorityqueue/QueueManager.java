@@ -44,7 +44,7 @@ public class QueueManager {
                 System.out.println("Using a unsorted linked list.");
                 break;
             case "h":
-                q = new BinaryHeapQueue<>();
+                q = new BinaryHeapQueue<>(10);
                 System.out.println("Using a max binary heap queue.");
                 break;
             default:
