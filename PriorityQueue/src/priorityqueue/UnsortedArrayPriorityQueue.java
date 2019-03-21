@@ -5,6 +5,7 @@ package priorityqueue;
  */
 public class UnsortedArrayPriorityQueue<T> implements PriorityQueue<T> {
     
+    //setting up the array, integer for the sizing and tailIndex to point to the end of the array
     private final Object[] storage;
     private final int capacity;
     private int tailIndex;
@@ -20,6 +21,7 @@ public class UnsortedArrayPriorityQueue<T> implements PriorityQueue<T> {
         tailIndex = -1;
     }
 
+    //to return the head of the queue by returning position 0 of the array
     @Override
     public T head() throws QueueUnderflowException {
         if (isEmpty()) {
@@ -29,6 +31,7 @@ public class UnsortedArrayPriorityQueue<T> implements PriorityQueue<T> {
         }
     }
 
+    //adds a new entry to the array by pushing the tail position by 1 and adding the entry at the position of the tailIndex
     @Override
     public void add(T item, int priority) throws QueueOverflowException {
         tailIndex = tailIndex + 1;
@@ -43,6 +46,7 @@ public class UnsortedArrayPriorityQueue<T> implements PriorityQueue<T> {
         }
     }
 
+    //removes the head of the queue and reduces the tailIndex by one so there is no Null entrys in the array.
     @Override
     public void remove() throws QueueUnderflowException {
         if (isEmpty()) {

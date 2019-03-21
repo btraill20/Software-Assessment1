@@ -1,5 +1,6 @@
 package priorityqueue;
 
+//node class used for the linked list implementations
 public class Node<T> {
     
     private T item;

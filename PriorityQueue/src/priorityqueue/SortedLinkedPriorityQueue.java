@@ -5,8 +5,9 @@ package priorityqueue;
  */
 public class SortedLinkedPriorityQueue<T>  implements PriorityQueue<T> {
 
-  private Node<T> top;
+    private Node<T> top;
     
+    //cotructor to set the initial node position
     public SortedLinkedPriorityQueue(){
         top = null;
     }

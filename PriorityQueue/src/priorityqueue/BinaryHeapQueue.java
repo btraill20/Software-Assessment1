@@ -22,7 +22,6 @@ public class BinaryHeapQueue<T>  implements PriorityQueue<T> {
         return (i-1) / 2;
     }
     
-    
     protected int left(int i) {
         return i * 2 + 1;
     }
@@ -31,12 +30,14 @@ public class BinaryHeapQueue<T>  implements PriorityQueue<T> {
         return i * 2 + 2;
     }
     
-    protected void swap(int index1, int index2) {
-        Object tmp = storage[index1];
-        storage[index1] = storage[index2];
-        storage[index2] = tmp;        
-    }
+    //method for swapping the nodes after checking the values between the parent and children, not currently used
+//    protected void swap(int index1, int index2) {
+//        Object tmp = storage[index1];
+//        storage[index1] = storage[index2];
+//        storage[index2] = tmp;        
+//    }
     
+    //method to sort after adding a new entry to the array.
     public void sort(Object[] storage) 
     { 
         int n = storage.length; 
