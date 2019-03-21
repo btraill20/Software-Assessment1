@@ -40,7 +40,7 @@ public class UnsortedLinkedPriorityQueueTest extends PriorityQueueTest{
         System.out.println("basic adding test");
         instance.add(person,1);
         instance.add(person2,2);
-        String expOutput = "[(alan, 2), (ben, 1)]";
+        String expOutput = "Queue contents = [alan 2, ben 1]";
         System.out.println("Expected: "+expOutput);
         String output = instance.toString();
         System.out.println("actual: "+output);
@@ -82,7 +82,7 @@ public class UnsortedLinkedPriorityQueueTest extends PriorityQueueTest{
         String removeOutput = instance.toString();
         System.out.println("Queue after remove: "+removeOutput);
         
-        String expOutput = "[(alan, 2), (ben, 1)]";
+        String expOutput = "Queue contents = [alan 2, ben 1]";
         System.out.println("Expected: "+expOutput);
         String output = instance.toString();
         System.out.println("actual: "+output);
@@ -108,7 +108,7 @@ public class UnsortedLinkedPriorityQueueTest extends PriorityQueueTest{
 
         instance.head();
         
-        String expOutput = "[(alan, 2), (ben, 1)]";
+        String expOutput = "Queue contents = [alan 2, ben 1]";
         System.out.println("Expected: "+expOutput);
         String output = instance.toString();
         System.out.println("actual: "+output);
